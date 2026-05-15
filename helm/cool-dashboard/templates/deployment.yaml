@@ -20,6 +20,7 @@ spec:
         options:
           - name: ndots
             value: "2"
+      serviceAccountName: {{ .Release.Name }}
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
