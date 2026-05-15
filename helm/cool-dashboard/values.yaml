@@ -1,0 +1,25 @@
+replicaCount: 1
+
+image:
+  repository: cool-dashboard
+  tag: rev-1
+  pullPolicy: Never
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+nodeSelector:
+  kubernetes.io/hostname: mgplcb05
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 128Mi
+  requests:
+    cpu: 50m
+    memory: 64Mi
+
+env:
+  PORT: "8080"
