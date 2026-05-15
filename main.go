@@ -34,7 +34,6 @@ func main() {
 	}
 
 	go func() {
-		log.Printf("cool-dashboard listening on :%s", port)
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Fatalf("server error: %v", err)
 		}
@@ -43,14 +42,12 @@ func main() {
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
-	log.Println("shutting down")
 
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 	if err := srv.Shutdown(ctx); err != nil {
 		log.Fatalf("forced shutdown: %v", err)
 	}
-	log.Println("server stopped")
 }
 
 func healthHandler(w http.ResponseWriter, r *http.Request) {
